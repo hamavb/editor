@@ -1,6 +1,6 @@
 {
   "name": "ory-editor-core-hubside",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "./lib/index.js",
   "author": "ORY GmbH",
   "license": "GNU Lesser General Public License v3.0",
@@ -11,8 +11,7 @@
     "build:lib:watch": "npm run build:lib -- --watch",
     "build:css": "postcss -c ../../postcss.config.js --dir lib/ src/index.css",
     "build:css:watch": "npm run build:css -- -w",
-    "docs":
-      "documentation build ./src/**/*.js --format md --github -o ../../docs/api/core.md",
+    "docs": "documentation build ./src/**/*.js --format md --github -o ../../docs/api/core.md",
     "prebuild": "npm run clean",
     "clean": "rimraf \"lib/*\"",
     "flow:generate": "flow-typed install  --flowVersion=0.46.0"
