@@ -59,7 +59,7 @@ const HTMLCell = (props: Cell) => {
     const Renderer = StaticComponent || Component;
 
     return (
-      <div className={cn}>
+      <div className={cn} style={style}>
         <div className="ory-cell-inner ory-cell-leaf">
           <Renderer isPreviewMode readOnly state={state} onChange={noop} />
         </div>
@@ -67,7 +67,7 @@ const HTMLCell = (props: Cell) => {
     );
   } else if (rows.length > 0) {
     return (
-      <div className={cn}>
+      <div className={cn} style={style}>
         {rows.map((r: Row) => (
           <HTMLRow key={r.id} {...r} className="ory-cell-inner" />
         ))}
@@ -76,7 +76,7 @@ const HTMLCell = (props: Cell) => {
   }
 
   return (
-    <div className={cn}>
+    <div className={cn} style={style}>
       <div className="ory-cell-inner" />
     </div>
   );
