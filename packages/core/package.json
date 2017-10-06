@@ -1,6 +1,6 @@
 {
   "name": "ory-editor-core-hubside",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "./lib/index.js",
   "author": "ORY GmbH",
   "license": "GNU Lesser General Public License v3.0",
