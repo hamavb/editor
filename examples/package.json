@@ -5,17 +5,17 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "material-ui": "^0.19.1",
-    "ory-editor-core": "0.0.0",
-    "ory-editor-plugins-divider": "0.0.0",
-    "ory-editor-plugins-image": "0.0.0",
-    "ory-editor-plugins-parallax-background": "0.0.0",
-    "ory-editor-plugins-slate": "0.0.0",
-    "ory-editor-plugins-spacer": "0.0.0",
-    "ory-editor-plugins-video": "0.0.0",
-    "ory-editor-plugins-html5-video": "0.0.0",
-    "ory-editor-renderer": "0.0.0",
-    "ory-editor-plugins-default-native": "0.0.0",
-    "ory-editor-ui": "0.0.0",
+    "ory-editor-core-hubside": "0.0.0",
+    "ory-editor-renderer-hubside": "0.0.0",
+    "ory-editor-plugins-divider": "*",
+    "ory-editor-plugins-image": "*",
+    "ory-editor-plugins-parallax-background": "*",
+    "ory-editor-plugins-slate": "*",
+    "ory-editor-plugins-spacer": "*",
+    "ory-editor-plugins-video": "*",
+    "ory-editor-plugins-html5-video": "*",
+    "ory-editor-plugins-default-native": "*",
+    "ory-editor-ui": "*",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-tap-event-plugin": "^2.0.1"
@@ -64,12 +64,8 @@
     "build": "node scripts/build.js"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
+    "collectCoverageFrom": ["src/**/*.{js,jsx}"],
+    "setupFiles": ["<rootDir>/config/polyfills.js"],
     "testPathIgnorePatterns": [
       "<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]"
     ],
@@ -80,17 +76,13 @@
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
+    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     }
   },
   "babel": {
-    "presets": [
-      "react-app"
-    ]
+    "presets": ["react-app"]
   },
   "eslintConfig": {
     "extends": "react-app"

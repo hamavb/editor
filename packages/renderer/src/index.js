@@ -1,14 +1,14 @@
 // @flow
 import React from "react";
 import classNames from "classnames";
-import PluginService from "ory-editor-core/lib/service/plugin";
-import { editable as reducer } from "ory-editor-core/lib/reducer/editable";
-import type { Cell, Row } from "ory-editor-core/lib/types/editable";
+import PluginService from "ory-editor-core-hubside/lib/service/plugin";
+import { editable as reducer } from "ory-editor-core-hubside/lib/reducer/editable";
+import type { Cell, Row } from "ory-editor-core-hubside/lib/types/editable";
 
 // if classNames is set, default size is for md devices, the rest of devices is classNames responsibility
 const gridClass = (size: number = 12, classNames: ?string = null): string =>
   classNames
-    ? classNames.replace("<size>", size)
+    ? classNames.replace("<size>", size.toString())
     : `ory-cell-sm-${size} ory-cell-xs-12`;
 
 const HTMLRow = ({ cells = [], className, hasInlineChildren }: Row) => (
@@ -32,7 +32,8 @@ const HTMLCell = (props: Cell) => {
     hasInlineNeighbour,
     inline,
     size,
-    classNames: gridClassNames
+    classNames: gridClassNames,
+    style
   } = props;
   const cn = classNames("ory-cell", gridClass(size, gridClassNames), {
     "ory-cell-has-inline-neighbour": hasInlineNeighbour,
@@ -43,7 +44,7 @@ const HTMLCell = (props: Cell) => {
     const { state, plugin: { Component } } = layout;
 
     return (
-      <div className={cn}>
+      <div className={cn} style={style}>
         <div className="ory-cell-inner">
           <Component isPreviewMode readOnly state={state} onChange={noop}>
             {rows.map((r: Row) => (
@@ -89,8 +90,7 @@ export const HTMLRenderer = ({
   plugins: { layout: [], content: [] }
 }) => {
   const service = new PluginService(plugins);
-
-  console.log(service.unserialize(state));
   const props = reducer(service.unserialize(state), { type: "renderer/noop" });
+
   return <HTMLRow {...props} />;
 };

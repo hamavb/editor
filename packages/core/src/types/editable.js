@@ -1,10 +1,10 @@
 // @flow
 /* eslint no-use-before-define: off */
-import { ContentPlugin, LayoutPlugin } from '../service/plugin/classes'
+import { ContentPlugin, LayoutPlugin } from "../service/plugin/classes";
 
 export type Config = {
   whitelist: Array<string>
-}
+};
 
 type AbstractCell<T> = {
   id: string,
@@ -33,19 +33,21 @@ type AbstractCell<T> = {
     below: number,
     right: number,
     left: number
-  }
-}
+  },
+  style?: Object,
+  classNames?: ?string
+};
 
-export type Cell = AbstractCell<Row>
+export type Cell = AbstractCell<Row>;
 
 export const createCell = (): Cell => ({
-  id: '',
+  id: "",
   rows: [],
   size: 12,
   hover: null,
   inline: null,
   focused: false,
-  focusSource: '',
+  focusSource: "",
   resizable: false,
   bounds: { left: 0, right: 0 },
   hasInlineNeighbour: null,
@@ -55,7 +57,7 @@ export const createCell = (): Cell => ({
     right: 0,
     left: 0
   }
-})
+});
 
 export type ComponetizedCell = {
   id: string,
@@ -110,23 +112,23 @@ export type ComponetizedCell = {
   insertCellRightOf(type: string): void,
 
   onChange(state: any): void
-}
+};
 
 type AbstractRow<T> = {
   id: string,
   hover: ?string,
   cells: Array<T>,
   hasInlineChildren: boolean
-}
+};
 
-export type Row = AbstractRow<Cell>
+export type Row = AbstractRow<Cell>;
 
 export const createRow = (): Row => ({
-  id: '',
+  id: "",
   hover: null,
   cells: [],
   hasInlineChildren: false
-})
+});
 
 export type ComponetizedRow = {
   id: string,
@@ -148,16 +150,16 @@ export type ComponetizedRow = {
   clearHover(): void,
   cancelCellDrag(): void,
   blurAllCells(): void
-}
+};
 
 type AbstractEditable<T> = {
   id: string,
   config: Config,
   cells: Array<T>,
   cellOrder: Array<{ id: string, isLeaf: boolean }>
-}
+};
 
-export type Editable = AbstractEditable<Cell>
+export type Editable = AbstractEditable<Cell>;
 
 export type EditableComponentState = {
   id: string,
@@ -175,6 +177,10 @@ export type EditableComponentState = {
 
   blurAllCells(): void,
   createFallbackCell(): void
-}
+};
 
-export type NativeFactory = (hover: any, monitor: any, component: any) => Object
+export type NativeFactory = (
+  hover: any,
+  monitor: any,
+  component: any
+) => Object;

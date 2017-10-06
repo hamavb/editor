@@ -149,9 +149,10 @@ export default class PluginService {
       inline,
       size,
       classNames,
+      style,
       id
     } = state;
-    const newState: Object = { id, inline, classNames, size };
+    const newState: Object = { id, inline, classNames, size, style };
 
     const {
       plugin: { name: contentName = null, version: contentVersion = "*" } = {},

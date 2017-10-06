@@ -1,24 +1,24 @@
 // @flow
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import classNames from 'classnames'
-import { bindActionCreators } from 'redux'
-import { createStructuredSelector } from 'reselect'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import classNames from "classnames";
+import { bindActionCreators } from "redux";
+import { createStructuredSelector } from "reselect";
 
-import Inner from './Inner'
-import { shouldPureComponentUpdate } from '../../helper/shouldComponentUpdate'
-import { editableConfig, node, purifiedNode } from '../../selector/editable'
+import Inner from "./Inner";
+import { shouldPureComponentUpdate } from "../../helper/shouldComponentUpdate";
+import { editableConfig, node, purifiedNode } from "../../selector/editable";
 import {
   isPreviewMode,
   isEditMode,
   isResizeMode,
   isInsertMode,
   isLayoutMode
-} from '../../selector/display'
-import { resizeCell, focusCell, blurAllCells } from '../../actions/cell'
-import Resizable from './Resizable'
+} from "../../selector/display";
+import { resizeCell, focusCell, blurAllCells } from "../../actions/cell";
+import Resizable from "./Resizable";
 
-import type { ComponetizedCell } from '../../types/editable'
+import type { ComponetizedCell } from "../../types/editable";
 
 const gridClass = ({
   node: { size },
@@ -26,22 +26,22 @@ const gridClass = ({
   isEditMode
 }: ComponetizedCell): string => {
   if (isPreviewMode || isEditMode) {
-    return `ory-cell-${isPreviewMode || isEditMode ? 'sm' : 'xs'}-${size ||
-      12} ory-cell-xs-12`
+    return `ory-cell-${isPreviewMode || isEditMode ? "sm" : "xs"}-${size ||
+      12} ory-cell-xs-12`;
   }
 
-  return `ory-cell-xs-${size || 12}`
-}
+  return `ory-cell-xs-${size || 12}`;
+};
 
 const stopClick = (isEditMode: boolean) => (e: Event) =>
-  isEditMode ? e.stopPropagation() : null
+  isEditMode ? e.stopPropagation() : null;
 
-type Props = ComponetizedCell
+type Props = ComponetizedCell;
 
 class Cell extends Component {
-  shouldComponentUpdate = shouldPureComponentUpdate
+  shouldComponentUpdate = shouldPureComponentUpdate;
 
-  props: Props
+  props: Props;
 
   render() {
     const {
@@ -51,21 +51,22 @@ class Cell extends Component {
       updateDimensions,
       isResizeMode,
       isEditMode,
-      node: { inline, resizable, hasInlineNeighbour, focused },
+      node: { inline, resizable, hasInlineNeighbour, focused, style },
       isLayoutMode
-    } = this.props
+    } = this.props;
 
     return (
       <div
-        className={classNames('ory-cell', gridClass(this.props), {
-          'ory-cell-has-inline-neighbour': hasInlineNeighbour,
-          [`ory-cell-inline-${inline || ''}`]: inline,
+        className={classNames("ory-cell", gridClass(this.props), {
+          "ory-cell-has-inline-neighbour": hasInlineNeighbour,
+          [`ory-cell-inline-${inline || ""}`]: inline,
           // 'ory-cell-bring-to-front': inline, && (!isLayoutMode && !isInsertMode && !isResizeMode),
-          'ory-cell-focused': focused,
-          'ory-cell-resizing-overlay': isResizeMode,
-          'ory-cell-bring-to-front': !isResizeMode && !isLayoutMode && inline // inline must not be active for resize/layout
+          "ory-cell-focused": focused,
+          "ory-cell-resizing-overlay": isResizeMode,
+          "ory-cell-bring-to-front": !isResizeMode && !isLayoutMode && inline // inline must not be active for resize/layout
         })}
         onClick={stopClick(isEditMode)}
+        style={style}
       >
         {resizable && isResizeMode ? (
           <Resizable
@@ -84,7 +85,7 @@ class Cell extends Component {
           <Inner {...this.props} styles={null} />
         )}
       </div>
-    )
+    );
   }
 }
 
@@ -98,7 +99,7 @@ const mapStateToProps = createStructuredSelector({
   config: editableConfig,
   node: purifiedNode,
   rawNode: (state: any, props: any) => () => node(state, props)
-})
+});
 
 const mapDispatchToProps = (dispatch: Function, { id }: { id: string }) =>
   bindActionCreators(
@@ -108,6 +109,6 @@ const mapDispatchToProps = (dispatch: Function, { id }: { id: string }) =>
       blurAllCells
     },
     dispatch
-  )
+  );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cell)
+export default connect(mapStateToProps, mapDispatchToProps)(Cell);
