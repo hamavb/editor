@@ -11,11 +11,19 @@ const gridClass = (size: number = 12, classNames: ?string = null): string =>
     ? classNames.replace("<size>", size.toString())
     : `ory-cell-sm-${size} ory-cell-xs-12`;
 
-const HTMLRow = ({ cells = [], className, hasInlineChildren }: Row) => (
+const HTMLRow = ({
+  cells = [],
+  className,
+  hasInlineChildren,
+  classNames = null,
+  style
+}: Row) => (
   <div
     className={classNames("ory-row", className, {
-      "ory-row-has-floating-children": hasInlineChildren
+      "ory-row-has-floating-children": hasInlineChildren,
+      classNames: Boolean(classNames)
     })}
+    style={style}
   >
     {cells.map((c: Cell) => <HTMLCell key={c.id} {...c} />)}
   </div>
